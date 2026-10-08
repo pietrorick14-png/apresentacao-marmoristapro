@@ -157,7 +157,7 @@ h2{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,5.5vw,36px)
     </div>
     <figure class="player" data-uid="" data-titulo="Vídeo 7: como instalar e assinar no celular"></figure>
     <p class="support">Você usa o mesmo acesso no telefone e no computador.</p>
-    <p style="margin:24px 0 0"><a class="btn" href="#assinar">Assinar o Marmorista Pro</a></p>
+    <p style="margin:24px 0 0"><a class="btn" href="https://marmoristapro.online/?acesso=D7JcgVtJGKPX&amp;assinar=1">Assinar o Marmorista Pro</a></p>
 
     <div class="help"><b>Ficou com alguma dúvida?</b> Me chama no WhatsApp e eu respondo.</div>
   </section>
@@ -257,8 +257,25 @@ h2{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,5.5vw,36px)
           try {
             const Hls = await carregarHls();
             if (!Hls.isSupported()) throw 0;
-            // capLevelToPlayerSize: não baixa resolução maior do que a tela consegue mostrar
-            const hls = new Hls({ capLevelToPlayerSize: true });
+            // capLevelToPlayerSize: não baixa resolução maior do que a tela consegue mostrar.
+            // Internet ruim: começa na qualidade que a conexão aguenta e guarda até 1 min de vídeo adiantado,
+            // para não travar quando o sinal oscila.
+            const hls = new Hls({
+              capLevelToPlayerSize: true,
+              maxBufferLength: 60,
+              maxMaxBufferLength: 120,
+              abrBandWidthFactor: 0.8,
+              abrBandWidthUpFactor: 0.6,
+              fragLoadPolicy: { default: { maxTimeToFirstByteMs: 10000, maxLoadTimeMs: 120000,
+                timeoutRetry: { maxNumRetry: 6, retryDelayMs: 0, maxRetryDelayMs: 0 },
+                errorRetry: { maxNumRetry: 8, retryDelayMs: 1000, maxRetryDelayMs: 8000 } } },
+            });
+            // Se a conexão cair no meio, tenta de novo em vez de travar
+            hls.on(Hls.Events.ERROR, (_, d) => {
+              if (!d.fatal) return;
+              if (d.type === Hls.ErrorTypes.NETWORK_ERROR) setTimeout(() => hls.startLoad(), 2000);
+              else if (d.type === Hls.ErrorTypes.MEDIA_ERROR) hls.recoverMediaError();
+            });
             hls.loadSource(src);
             hls.attachMedia(video);
           } catch {
