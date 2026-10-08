@@ -36,7 +36,7 @@ img{max-width:100%}
 .wrap{max-width:760px;margin-inline:auto}
 
 /* topo */
-.hero{padding-block:48px 40px;position:relative}
+.hero{padding-block:48px 40px;position:relative;text-align:center}
 .hero::before{content:"";position:absolute;inset:0 -16px auto -16px;height:100%;z-index:-1;
   background:
    linear-gradient(115deg,transparent 40%,color-mix(in srgb,var(--accent) 9%,transparent) 41%,transparent 42.5%),
@@ -46,16 +46,16 @@ img{max-width:100%}
 .brand i{width:22px;height:22px;border-radius:5px;background:var(--accent);display:inline-block;position:relative}
 .brand i::after{content:"";position:absolute;inset:5px 5px auto auto;width:9px;height:9px;border-top:2px solid var(--accent-ink);border-right:2px solid var(--accent-ink)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(34px,8vw,58px);line-height:1.02;letter-spacing:-.02em;margin:22px 0 16px;text-wrap:balance}
-.lead{font-size:18px;color:var(--muted);max-width:56ch;margin:0}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.lead{font-size:18px;color:var(--muted);max-width:56ch;margin:0 auto}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:22px}
 .chip{font-size:13px;font-weight:600;padding:6px 12px;border:1px solid var(--line);border-radius:99px;background:var(--surface);color:var(--ink)}
 
 /* etapas */
-.step{padding-block:44px;border-top:1px solid var(--line)}
+.step{padding-block:44px;border-top:1px solid var(--line);text-align:center}
 .tag{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
 h2{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,5.5vw,36px);line-height:1.1;letter-spacing:-.015em;margin:0 0 20px;text-wrap:balance}
-.support{color:var(--muted);margin:16px 0 0;max-width:60ch}
-.list{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0;padding:0;list-style:none}
+.support{color:var(--muted);margin:16px auto 0;max-width:60ch}
+.list{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:18px 0 0;padding:0;list-style:none}
 .list li{font-size:14px;padding:5px 11px;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
 
 /* vídeo vertical no formato da tela do celular (1080x2338): no celular ocupa a largura, mas nunca passa de 85% da altura da tela */
@@ -78,9 +78,9 @@ h2{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,5.5vw,36px)
 .player.vazio span{font-size:13px}
 
 /* final */
-.final{padding-block:52px 72px;border-top:1px solid var(--line)}
+.final{padding-block:52px 72px;border-top:1px solid var(--line);text-align:center}
 .final h2{margin-bottom:12px}
-.devices{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 22px}
+.devices{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:0 0 22px}
 .btn{display:inline-block;font-family:var(--f-display);font-weight:700;font-size:17px;background:var(--accent);color:var(--accent-ink);padding:15px 26px;border-radius:10px;text-decoration:none;border:0;cursor:pointer}
 .btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 .help{margin-top:36px;padding:18px;background:var(--surface);border:1px solid var(--line);border-radius:10px;color:var(--muted);font-size:15px}
