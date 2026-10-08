@@ -1,0 +1,6 @@
+{
+  // Site estático: o Cloudflare publica a pasta public/
+  "name": "apresentacao-marmoristapro",
+  "compatibility_date": "2026-09-01",
+  "assets": { "directory": "./public" }
+}
