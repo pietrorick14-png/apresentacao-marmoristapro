@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Marmorista Pro Apresentação</title>
+<link rel="preconnect" href="https://customer-nhrw34ic538tdafl.cloudflarestream.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
@@ -57,10 +58,10 @@ h2{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,5.5vw,36px)
 .list{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0;padding:0;list-style:none}
 .list li{font-size:14px;padding:5px 11px;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
 
-/* vídeo vertical 9:16: no celular ocupa a largura, mas nunca passa de 80% da altura da tela */
-.player{position:relative;margin:0 auto;aspect-ratio:9/16;
-  width:min(100%,400px,calc(80vh*9/16));
-  width:min(100%,400px,calc(80svh*9/16));
+/* vídeo vertical no formato da tela do celular (1080x2338): no celular ocupa a largura, mas nunca passa de 85% da altura da tela */
+.player{position:relative;margin:0 auto;aspect-ratio:1080/2338;
+  width:min(100%,400px,calc(85vh*1080/2338));
+  width:min(100%,400px,calc(85svh*1080/2338));
   border-radius:14px;overflow:hidden;background:#000;isolation:isolate}
 .player video,.player img,.player .iniciar{position:absolute;inset:0;width:100%;height:100%}
 .player video{object-fit:contain;background:#000}
@@ -108,14 +109,14 @@ h2{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,5.5vw,36px)
   <section class="step" id="cliente">
     <p class="tag">Etapa 1 de 6</p>
     <h2>Como será a visão do seu cliente a partir de hoje</h2>
-    <figure class="player" data-uid="" data-titulo="Vídeo 1: cliente abrindo o link do projeto"></figure>
+    <figure class="player" data-uid="1ae13e463e6983871c0468f18c4dd58e" data-titulo="Vídeo 1: cliente abrindo o link do projeto"></figure>
     <p class="support">Você cria o projeto e envia o link. O cliente vê tudo em 3D, separa cada peça, confere as medidas e aprova o projeto por lá.</p>
   </section>
 
   <section class="step" id="projeto">
     <p class="tag">Etapa 2 de 6</p>
     <h2>Como criar um projeto do zero</h2>
-    <figure class="player" data-uid="" data-titulo="Vídeo 2: criando um projeto (exemplo: bancada)"></figure>
+    <figure class="player" data-uid="77313eddc3604d5a5f78e134ef9c5826" data-titulo="Vídeo 2: criando um projeto (exemplo: bancada)"></figure>
     <ul class="list">
       <li>Bancadas</li><li>Pias</li><li>Lavatórios</li><li>Soleiras</li><li>Peitoris</li><li>Rodapés</li><li>Nichos</li><li>Lavanderia</li><li>Ilhas</li><li>Cubas</li><li>Escada</li><li>Churrasqueira</li><li>e mais categorias</li>
     </ul>
@@ -124,28 +125,28 @@ h2{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,5.5vw,36px)
   <section class="step" id="orcamentos">
     <p class="tag">Etapa 3 de 6</p>
     <h2>Como acompanhar seus orçamentos a partir de hoje</h2>
-    <figure class="player" data-uid="" data-titulo="Vídeo 3: aba de orçamentos"></figure>
+    <figure class="player" data-uid="9e4fe6514ce3848a0bc76c0c35461c17" data-titulo="Vídeo 3: aba de orçamentos"></figure>
     <p class="support">Novos, em aberto, aprovados e concluídos, tudo na mesma aba.</p>
   </section>
 
   <section class="step" id="obras">
     <p class="tag">Etapa 4 de 6</p>
     <h2>Como acompanhar suas obras a partir de hoje</h2>
-    <figure class="player" data-uid="" data-titulo="Vídeo 4: aba de obras"></figure>
+    <figure class="player" data-uid="55981350863d51c37cb40d605a04a90b" data-titulo="Vídeo 4: aba de obras"></figure>
     <p class="support">Várias obras ao mesmo tempo, cada uma com a etapa em que está.</p>
   </section>
 
   <section class="step" id="retalhos">
     <p class="tag">Etapa 5 de 6</p>
     <h2>Como controlar seus retalhos e lucrar com eles, sem jogar mais nada fora</h2>
-    <figure class="player" data-uid="" data-titulo="Vídeo 5: aba de retalhos e plano de corte"></figure>
+    <figure class="player" data-uid="862a8514b418081700b89c2b269befed" data-titulo="Vídeo 5: aba de retalhos e plano de corte"></figure>
     <p class="support">O que sobra de uma obra entra no controle e pode ser usado na próxima.</p>
   </section>
 
   <section class="step" id="clientes">
     <p class="tag">Etapa 6 de 6</p>
     <h2>Como ter o controle dos seus clientes e falar com o suporte</h2>
-    <figure class="player" data-uid="" data-titulo="Vídeo 6: aba de clientes e aba de suporte"></figure>
+    <figure class="player" data-uid="08dacede0d5d8e99a189aa84313d6f7d" data-titulo="Vídeo 6: aba de clientes e aba de suporte"></figure>
   </section>
 
   <section class="final" id="assinar">
@@ -155,7 +156,7 @@ h2{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,5.5vw,36px)
       <span class="chip">No celular</span>
       <span class="chip">No computador</span>
     </div>
-    <figure class="player" data-uid="" data-titulo="Vídeo 7: como instalar e assinar no celular"></figure>
+    <figure class="player" data-uid="bd7a04fcbc2605763d2e5bb1462805c2" data-titulo="Vídeo 7: como instalar e assinar no celular"></figure>
     <p class="support">Você usa o mesmo acesso no telefone e no computador.</p>
     <p style="margin:24px 0 0"><a class="btn" href="https://marmoristapro.online/?acesso=D7JcgVtJGKPX&amp;assinar=1">Assinar o Marmorista Pro</a></p>
 
@@ -170,7 +171,7 @@ h2{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,5.5vw,36px)
    O Stream entrega a qualidade certa para a internet e o tamanho da tela de cada pessoa.
    Só um vídeo toca por vez, e ele pausa sozinho se sair da tela ou se a pessoa sair da página. */
 (() => {
-  const HOST = 'customer-CODIGO.cloudflarestream.com'; // subdomínio da conta no Stream
+  const HOST = 'customer-nhrw34ic538tdafl.cloudflarestream.com'; // subdomínio da conta no Stream
   const HLS_JS = 'https://cdn.jsdelivr.net/npm/hls.js@1.6.19/dist/hls.min.js';
   const MIN_VISIVEL = 0.5; // pausa quando mais da metade do vídeo sai da tela
 
@@ -229,7 +230,7 @@ h2{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,5.5vw,36px)
     img.loading = 'lazy';
     img.decoding = 'async';
     img.sizes = '(max-width: 432px) 100vw, 400px';
-    img.srcset = [640, 960, 1280, 1920].map((h) => `${capa(h)} ${h * 9 / 16}w`).join(', ');
+    img.srcset = [640, 960, 1280, 1800].map((h) => `${capa(h)} ${Math.round(h * 1080 / 2338)}w`).join(', ');
     img.src = capa(960);
 
     const botao = document.createElement('button');
