@@ -1,4 +1,8 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Marmorista Pro Apresentação</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,6 +20,8 @@
   --slot:#E8EBE8;
   --f-display:'Bricolage Grotesque','Arial Narrow',system-ui,sans-serif;
   --f-body:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+  color-scheme:light;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#111514;--surface:#1A201F;--ink:#ECF0EE;--muted:#9BA7A3;--line:#2B3331;--accent:#4FC3A1;--accent-ink:#06201A;--slot:#202827;color-scheme:dark}}
@@ -23,7 +29,9 @@
   --bg:#111514;--surface:#1A201F;--ink:#ECF0EE;--muted:#9BA7A3;--line:#2B3331;--accent:#4FC3A1;--accent-ink:#06201A;--slot:#202827;color-scheme:dark}
 
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;padding-inline:16px;padding-block:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;padding-inline:16px;padding-block:0}
+img{max-width:100%}
 .wrap{max-width:760px;margin-inline:auto}
 
 /* topo */
@@ -49,12 +57,24 @@ h2{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,5.5vw,36px)
 .list{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0;padding:0;list-style:none}
 .list li{font-size:14px;padding:5px 11px;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
 
-/* espaço do vídeo */
-.video{width:100%;aspect-ratio:16/9;max-width:100%;background:var(--slot);border:1.5px dashed var(--line);border-radius:10px;display:grid;place-items:center;text-align:center;padding:16px;color:var(--muted)}
-.video b{display:block;color:var(--ink);font-family:var(--f-display);font-size:16px;margin-top:10px}
-.video span{font-size:13px}
-.play{width:54px;height:54px;border-radius:50%;background:var(--accent);display:grid;place-items:center;margin-inline:auto}
-.play::after{content:"";border-left:15px solid var(--accent-ink);border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:4px}
+/* vídeo vertical 9:16: no celular ocupa a largura, mas nunca passa de 80% da altura da tela */
+.player{position:relative;margin:0 auto;aspect-ratio:9/16;
+  width:min(100%,400px,calc(80vh*9/16));
+  width:min(100%,400px,calc(80svh*9/16));
+  border-radius:14px;overflow:hidden;background:#000;isolation:isolate}
+.player video,.player img,.player .iniciar{position:absolute;inset:0;width:100%;height:100%}
+.player video{object-fit:contain;background:#000}
+.player img{object-fit:cover}
+.player .iniciar{border:0;padding:0;margin:0;cursor:pointer;display:grid;place-items:center;
+  background:linear-gradient(to top,rgb(0 0 0/.35),transparent 40%)}
+.player .iniciar:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+.player.ligado img,.player.ligado .iniciar{display:none}
+.play{width:64px;height:64px;border-radius:50%;background:var(--accent);display:grid;place-items:center;margin-inline:auto;box-shadow:0 6px 20px rgb(0 0 0/.25)}
+.play::after{content:"";border-left:18px solid var(--accent-ink);border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:5px}
+.player.vazio{background:var(--slot);border:1.5px dashed var(--line);display:grid;place-items:center;text-align:center;padding:16px;color:var(--muted)}
+.player.vazio .play{box-shadow:none}
+.player.vazio b{display:block;color:var(--ink);font-family:var(--f-display);font-size:16px;margin-top:12px}
+.player.vazio span{font-size:13px}
 
 /* final */
 .final{padding-block:52px 72px;border-top:1px solid var(--line)}
@@ -65,6 +85,8 @@ h2{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,5.5vw,36px)
 .help{margin-top:36px;padding:18px;background:var(--surface);border:1px solid var(--line);border-radius:10px;color:var(--muted);font-size:15px}
 .help b{color:var(--ink)}
 </style>
+</head>
+<body>
 
 <div class="wrap">
 
@@ -81,17 +103,19 @@ h2{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,5.5vw,36px)
     </div>
   </header>
 
+  <!-- Cada .player recebe em data-uid o ID do vídeo no Cloudflare Stream. data-capa (opcional) = momento usado como capa, ex.: 3s -->
+
   <section class="step" id="cliente">
     <p class="tag">Etapa 1 de 6</p>
     <h2>Como será a visão do seu cliente a partir de hoje</h2>
-    <div class="video"><div><div class="play"></div><b>Vídeo 1</b><span>Cliente abrindo o link do projeto</span></div></div>
+    <figure class="player" data-uid="" data-titulo="Vídeo 1: cliente abrindo o link do projeto"></figure>
     <p class="support">Você cria o projeto e envia o link. O cliente vê tudo em 3D, separa cada peça, confere as medidas e aprova o projeto por lá.</p>
   </section>
 
   <section class="step" id="projeto">
     <p class="tag">Etapa 2 de 6</p>
     <h2>Como criar um projeto do zero</h2>
-    <div class="video"><div><div class="play"></div><b>Vídeo 2</b><span>Criando um projeto (exemplo: bancada)</span></div></div>
+    <figure class="player" data-uid="" data-titulo="Vídeo 2: criando um projeto (exemplo: bancada)"></figure>
     <ul class="list">
       <li>Bancadas</li><li>Pias</li><li>Lavatórios</li><li>Soleiras</li><li>Peitoris</li><li>Rodapés</li><li>Nichos</li><li>Lavanderia</li><li>Ilhas</li><li>Cubas</li><li>Escada</li><li>Churrasqueira</li><li>e mais categorias</li>
     </ul>
@@ -100,28 +124,28 @@ h2{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,5.5vw,36px)
   <section class="step" id="orcamentos">
     <p class="tag">Etapa 3 de 6</p>
     <h2>Como acompanhar seus orçamentos a partir de hoje</h2>
-    <div class="video"><div><div class="play"></div><b>Vídeo 3</b><span>Aba de orçamentos</span></div></div>
+    <figure class="player" data-uid="" data-titulo="Vídeo 3: aba de orçamentos"></figure>
     <p class="support">Novos, em aberto, aprovados e concluídos, tudo na mesma aba.</p>
   </section>
 
   <section class="step" id="obras">
     <p class="tag">Etapa 4 de 6</p>
     <h2>Como acompanhar suas obras a partir de hoje</h2>
-    <div class="video"><div><div class="play"></div><b>Vídeo 4</b><span>Aba de obras</span></div></div>
+    <figure class="player" data-uid="" data-titulo="Vídeo 4: aba de obras"></figure>
     <p class="support">Várias obras ao mesmo tempo, cada uma com a etapa em que está.</p>
   </section>
 
   <section class="step" id="retalhos">
     <p class="tag">Etapa 5 de 6</p>
     <h2>Como controlar seus retalhos e lucrar com eles, sem jogar mais nada fora</h2>
-    <div class="video"><div><div class="play"></div><b>Vídeo 5</b><span>Aba de retalhos e plano de corte</span></div></div>
+    <figure class="player" data-uid="" data-titulo="Vídeo 5: aba de retalhos e plano de corte"></figure>
     <p class="support">O que sobra de uma obra entra no controle e pode ser usado na próxima.</p>
   </section>
 
   <section class="step" id="clientes">
     <p class="tag">Etapa 6 de 6</p>
     <h2>Como ter o controle dos seus clientes e falar com o suporte</h2>
-    <div class="video"><div><div class="play"></div><b>Vídeo 6</b><span>Aba de clientes e aba de suporte</span></div></div>
+    <figure class="player" data-uid="" data-titulo="Vídeo 6: aba de clientes e aba de suporte"></figure>
   </section>
 
   <section class="final" id="assinar">
@@ -131,7 +155,7 @@ h2{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,5.5vw,36px)
       <span class="chip">No celular</span>
       <span class="chip">No computador</span>
     </div>
-    <div class="video"><div><div class="play"></div><b>Vídeo 7</b><span>Como instalar e assinar no celular</span></div></div>
+    <figure class="player" data-uid="" data-titulo="Vídeo 7: como instalar e assinar no celular"></figure>
     <p class="support">Você usa o mesmo acesso no telefone e no computador.</p>
     <p style="margin:24px 0 0"><a class="btn" href="#assinar">Assinar o Marmorista Pro</a></p>
 
@@ -140,4 +164,116 @@ h2{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,5.5vw,36px)
 
 </div>
 
-</body></html>
+<script>
+/* Vídeos do Cloudflare Stream.
+   Nada é baixado até a pessoa dar play: antes disso só aparece a capa (carregada quando chega perto da tela).
+   O Stream entrega a qualidade certa para a internet e o tamanho da tela de cada pessoa.
+   Só um vídeo toca por vez, e ele pausa sozinho se sair da tela ou se a pessoa sair da página. */
+(() => {
+  const HOST = 'customer-CODIGO.cloudflarestream.com'; // subdomínio da conta no Stream
+  const HLS_JS = 'https://cdn.jsdelivr.net/npm/hls.js@1.6.19/dist/hls.min.js';
+  const MIN_VISIVEL = 0.5; // pausa quando mais da metade do vídeo sai da tela
+
+  const tocadores = [];
+
+  // Safari (iPhone e Mac) toca o Stream sozinho; os outros navegadores usam o hls.js
+  const hlsNativo = !!document.createElement('video').canPlayType('application/vnd.apple.mpegurl') && !/Android/i.test(navigator.userAgent);
+  let hlsJs;
+  const carregarHls = () => hlsJs ??= new Promise((ok, erro) => {
+    const s = document.createElement('script');
+    s.src = HLS_JS;
+    s.onload = () => ok(window.Hls);
+    s.onerror = () => { hlsJs = null; erro(); };
+    document.head.append(s);
+  });
+
+  const pausarTodos = (exceto) => {
+    for (const v of tocadores) if (v !== exceto && !v.paused) v.pause();
+  };
+
+  const emTelaCheia = (v) => document.fullscreenElement || document.webkitFullscreenElement || v.webkitDisplayingFullscreen;
+
+  const visibilidade = new IntersectionObserver((entradas) => {
+    for (const e of entradas) {
+      const v = e.target.querySelector('video');
+      if (v && !v.paused && e.intersectionRatio < MIN_VISIVEL && !emTelaCheia(v)) v.pause();
+    }
+  }, { threshold: [0, MIN_VISIVEL] });
+
+  // Deixa o hls.js pronto antes do primeiro play, para o vídeo começar sem espera
+  const preparar = new IntersectionObserver((entradas, obs) => {
+    if (entradas.some((e) => e.isIntersecting)) { obs.disconnect(); carregarHls().catch(() => {}); }
+  }, { rootMargin: '800px 0px' });
+
+  for (const el of document.querySelectorAll('.player')) {
+    const uid = (el.dataset.uid || '').trim();
+    const titulo = el.dataset.titulo || 'Vídeo';
+
+    if (!uid) {
+      el.classList.add('vazio');
+      el.innerHTML = '<div><div class="play"></div><b></b><span>Vídeo em breve</span></div>';
+      el.querySelector('b').textContent = titulo;
+      continue;
+    }
+
+    const base = `https://${HOST}/${uid}`;
+    const capa = (h) => `${base}/thumbnails/thumbnail.jpg?time=${el.dataset.capa || '1s'}&height=${h}`;
+
+    const video = document.createElement('video');
+    video.preload = 'none';
+    video.playsInline = true;
+    video.setAttribute('playsinline', '');
+
+    const img = document.createElement('img');
+    img.alt = '';
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.sizes = '(max-width: 432px) 100vw, 400px';
+    img.srcset = [640, 960, 1280, 1920].map((h) => `${capa(h)} ${h * 9 / 16}w`).join(', ');
+    img.src = capa(960);
+
+    const botao = document.createElement('button');
+    botao.type = 'button';
+    botao.className = 'iniciar';
+    botao.setAttribute('aria-label', `Assistir ${titulo}`);
+    botao.innerHTML = '<span class="play"></span>';
+
+    el.append(video, img, botao);
+    visibilidade.observe(el);
+    if (!hlsNativo) preparar.observe(el);
+
+    let iniciado = false;
+    botao.addEventListener('click', async () => {
+      el.classList.add('ligado');
+      video.controls = true;
+      if (!iniciado) {
+        iniciado = true;
+        tocadores.push(video);
+        video.addEventListener('play', () => pausarTodos(video));
+        const src = `${base}/manifest/video.m3u8`;
+        if (hlsNativo) {
+          video.src = src;
+        } else {
+          try {
+            const Hls = await carregarHls();
+            if (!Hls.isSupported()) throw 0;
+            // capLevelToPlayerSize: não baixa resolução maior do que a tela consegue mostrar
+            const hls = new Hls({ capLevelToPlayerSize: true });
+            hls.loadSource(src);
+            hls.attachMedia(video);
+          } catch {
+            video.src = src;
+          }
+        }
+      }
+      video.play().catch(() => {});
+    });
+  }
+
+  document.addEventListener('visibilitychange', () => { if (document.hidden) pausarTodos(); });
+  addEventListener('pagehide', () => pausarTodos());
+})();
+</script>
+
+</body>
+</html>
